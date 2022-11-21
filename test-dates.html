@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function myFunction() {
+var myArray = [
+	  {date:"2017-01-01",title:"nieuwjaarsdag"},
+	  {date:"2017-01-02",title:"nieuwjaarsdagstaart"},
+	  {date:"2017-03-02",title:"gerard jarig"},
+	  {date:"2017-04-08",title:"pa jarig"},
+	  {date:"2022-11-22",title:"vandaag"},
+	  {date:"2022-12-03",title:"test"}
+	  
+]
+const monthNames = ["Januari", "Februari", "Maart", "April", "Mei", "Juni",
+  "Juli", "Augustus", "September", "Oktober", "November", "December"
+];
+
+vandaag = new Date();
+vandaag.setDate(vandaag.getDate()-1);
+for (i =0; i< myArray.length; i++){
+	datum = new Date(myArray[i].date);
+	if(datum >= vandaag){
+		alert(datum);
+		i = myArray.length;
+	}
+}
+
+groupKey = 0;
+groups = myArray.reduce(function (r, o) {
+        var m = monthNames[new Date(o.date).getMonth()];
+        (r[m])? r[m].data.push(o) : r[m] = {group: m, data: [o]};
+        return r;
+    }, {});
+
+var result = Object.keys(groups).map(function(k){ return groups[k]; });
+
+console.log(result);
+
+}
+</script>
+</head>
+
+<body onload="myFunction()">
+<h1>Hello World!</h1>
+</body>
+
+</html>
